@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}CXO Finder — Find Company Executives{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-badge">🎯 Executive Intelligence Platform</div>
+  <h1>Find <span>CXO Contacts</span><br>at Any Company</h1>
+  <p>Search our database of 100+ real CXO executives. Enter a company name to get CEO, CFO, CTO and more.</p>
+
+  <div class="search-container">
+    <div class="search-box">
+      <input
+        type="text"
+        id="companyInput"
+        placeholder="Enter company name e.g. Microsoft, Apple, Tesla..."
+        autocomplete="off"
+        autofocus
+      >
+      <button class="search-btn" id="searchBtn" onclick="doSearch()">
+        🔍 Search
+      </button>
+    </div>
+
+    <div class="quick-search">
+      <span style="font-size:0.78rem;color:var(--muted);align-self:center">Quick:</span>
+      <button class="quick-chip" onclick="quickSearch('Microsoft')">Microsoft</button>
+      <button class="quick-chip" onclick="quickSearch('Apple')">Apple</button>
+      <button class="quick-chip" onclick="quickSearch('Google')">Google</button>
+      <button class="quick-chip" onclick="quickSearch('Amazon')">Amazon</button>
+      <button class="quick-chip" onclick="quickSearch('Tesla')">Tesla</button>
+      <button class="quick-chip" onclick="quickSearch('Salesforce')">Salesforce</button>
+      <button class="quick-chip" onclick="quickSearch('Zoom')">Zoom</button>
+      <button class="quick-chip" onclick="quickSearch('Stripe')">Stripe</button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-icon">👥</span>
+    <div>
+      <div class="stat-label">CXO Contacts</div>
+      <div class="stat-value">100+</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">🏢</span>
+    <div>
+      <div class="stat-label">Companies</div>
+      <div class="stat-value">70+</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">🎯</span>
+    <div>
+      <div class="stat-label">C-Suite Roles</div>
+      <div class="stat-value">CEO, CFO, CTO...</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">⚡</span>
+    <div>
+      <div class="stat-label">Data Source</div>
+      <div class="stat-value">DB + Live Web</div>
+    </div>
+  </div>
+</div>
+
+<!-- Results -->
+<div class="results-section" id="resultsSection">
+  <div class="empty-state">
+    <div class="empty-icon">🔎</div>
+    <div class="empty-title">Enter a company name above to find CXOs</div>
+    <p>Results include CEO, CFO, CTO, COO, CMO and other C-suite contacts</p>
+  </div>
+</div>
+{% endblock %}

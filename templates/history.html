@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Search History — CXO Finder{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-title">📋 Search History</div>
+
+  {% if history %}
+  <div class="table-container">
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Company Searched</th>
+          <th>Results Found</th>
+          <th>Searched At</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr>
+          <td style="color:var(--muted)">{{ loop.index }}</td>
+          <td style="font-weight:500">{{ item.company_name }}</td>
+          <td>
+            <span style="
+              background:rgba(59,130,246,0.1);
+              color:#3b82f6;
+              border-radius:20px;
+              padding:0.2rem 0.6rem;
+              font-size:0.8rem;
+              font-weight:600
+            ">{{ item.results_count }}</span>
+          </td>
+          <td style="color:var(--muted);font-size:0.85rem">{{ item.searched_at }}</td>
+          <td>
+            <a href="/?q={{ item.company_name }}" 
+               style="color:var(--accent);text-decoration:none;font-size:0.82rem"
+               onclick="event.preventDefault(); window.location='/?search=1'; localStorage.setItem('qs','{{ item.company_name }}')">
+              🔍 Search again
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📋</div>
+    <div class="empty-title">No searches yet</div>
+    <p>Your search history will appear here. <a href="/" style="color:var(--accent)">Start searching →</a></p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Re-search from history
+window.addEventListener('load', () => {
+  const qs = localStorage.getItem('qs');
+  if (qs && window.location.search.includes('search=1')) {
+    localStorage.removeItem('qs');
+    document.getElementById('companyInput').value = qs;
+    doSearch();
+  }
+});
+</script>
+{% endblock %}
